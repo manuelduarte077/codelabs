@@ -9,9 +9,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import dev.donmanuel.fakeapi.adapters.ImageCarouselAdapter;
 import dev.donmanuel.fakeapi.models.Product;
 import dev.donmanuel.fakeapi.network.ApiCallback;
 import dev.donmanuel.fakeapi.network.ApiClient;
@@ -19,8 +23,8 @@ import dev.donmanuel.fakeapi.network.ApiClient;
 public class ProductDetailActivity extends AppCompatActivity {
 
     private ImageView image;
-
     private TextView title, price, description;
+    private RecyclerView imageRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,18 +41,24 @@ public class ProductDetailActivity extends AppCompatActivity {
         title = findViewById(R.id.title);
         price = findViewById(R.id.price);
         description = findViewById(R.id.description);
+        imageRecyclerView = findViewById(R.id.imageRecyclerView);
 
-        // Obtener el ID del producto desde el Intent
+        // Configurar el RecyclerView para el carrusel
+        imageRecyclerView.setLayoutManager(
+            new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        );
+        
+        // Agregar PagerSnapHelper para efecto de paginación
+        PagerSnapHelper snapHelper = new PagerSnapHelper();
+        snapHelper.attachToRecyclerView(imageRecyclerView);
+
         int productId = getIntent().getIntExtra("productId", 0);
-
-        // Validar el ID del producto
         if (productId == 0) {
             Toast.makeText(this, "Producto no válido", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
 
-        // Llamar al cliente API para obtener los detalles del producto
         fetchProductDetails(productId);
     }
 
@@ -63,12 +73,18 @@ public class ProductDetailActivity extends AppCompatActivity {
                     price.setText("$" + product.getPrice());
                     description.setText(product.getDescription());
                     Picasso.get().load(product.getImages().get(0)).into(image);
+                    
+                    // Configurar el adaptador del carrusel de imágenes
+                    ImageCarouselAdapter carouselAdapter = new ImageCarouselAdapter(product.getImages());
+                    imageRecyclerView.setAdapter(carouselAdapter);
                 });
             }
 
             @Override
             public void onError(Exception e) {
-                runOnUiThread(() -> Toast.makeText(ProductDetailActivity.this, "Error al cargar detalles: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                runOnUiThread(() -> Toast.makeText(ProductDetailActivity.this, 
+                    "Error al cargar detalles: " + e.getMessage(), 
+                    Toast.LENGTH_SHORT).show());
             }
         });
     }
