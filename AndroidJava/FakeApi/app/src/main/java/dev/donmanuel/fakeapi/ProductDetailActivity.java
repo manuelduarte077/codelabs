@@ -20,6 +20,8 @@ import dev.donmanuel.fakeapi.models.Product;
 import dev.donmanuel.fakeapi.network.ApiCallback;
 import dev.donmanuel.fakeapi.network.ApiClient;
 
+import com.google.android.material.appbar.MaterialToolbar;
+
 public class ProductDetailActivity extends AppCompatActivity {
 
     private ImageView image;
@@ -30,6 +32,9 @@ public class ProductDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
+
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
