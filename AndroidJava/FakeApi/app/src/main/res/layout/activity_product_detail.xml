@@ -5,7 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="8dp"
     tools:context=".ProductDetailActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -25,6 +24,7 @@
         android:id="@+id/image"
         android:layout_width="0dp"
         android:layout_height="200dp"
+        android:layout_margin="8dp"
         android:layout_marginTop="20dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,6 +35,7 @@
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:layout_marginTop="16dp"
         android:padding="8dp"
         android:textSize="24sp"
@@ -47,6 +48,7 @@
         android:id="@+id/price"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:layout_marginTop="8dp"
         android:textColor="@android:color/holo_green_dark"
         android:textSize="24sp"
@@ -58,6 +60,7 @@
         android:id="@+id/description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:layout_marginTop="16dp"
         android:padding="8dp"
         android:textSize="16sp"
@@ -71,6 +74,7 @@
         android:id="@+id/imageRecyclerView"
         android:layout_width="0dp"
         android:layout_height="200dp"
+        android:layout_margin="8dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
