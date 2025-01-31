@@ -1,0 +1,7 @@
+package dev.donmanuel.fakestore
+
+interface Platform {
+    val name: String
+}
+
+expect fun getPlatform(): Platform
