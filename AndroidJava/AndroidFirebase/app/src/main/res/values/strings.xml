@@ -4,4 +4,5 @@
     <string name="password_text">Contraseña</string>
     <string name="login_btn">Iniciar Sesión</string>
     <string name="register_btn">Registrarse</string>
+    <string name="bienvenido">"Bienvenido, "</string>
 </resources>
