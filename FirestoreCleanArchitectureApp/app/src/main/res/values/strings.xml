@@ -1,0 +1,22 @@
+<resources>
+    <!--App-->
+    <string name="app_name">FiresStore</string>
+    <!--Texts-->
+    <string name="empty_book_list_text">"The book list is empty."</string>
+    <string name="add_book">"Add book"</string>
+    <!--Buttons-->
+    <string name="add_button">"Add"</string>
+    <string name="update_button">"Update"</string>
+    <string name="cancel_button">"Cancel"</string>
+    <!--Icons-->
+    <string name="edit_icon">"Edit"</string>
+    <string name="delete_icon">Delete</string>
+    <!--Content Descriptions-->
+    <string name="open_add_book_dialog">"Open add book dialog."</string>
+    <!--Placeholders-->
+    <string name="book_title">"Type a book title…"</string>
+    <string name="book_author">"Type a book author…"</string>
+    <!--Messages-->
+    <string name="invalid_book_field_message">"filed cannot be empty or contain only whitespace."</string>
+    <string name="book_action_message">"operation successfully performed."</string>
+</resources>
