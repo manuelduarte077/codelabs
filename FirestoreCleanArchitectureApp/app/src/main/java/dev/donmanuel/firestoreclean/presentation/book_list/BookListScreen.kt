@@ -1,9 +1,6 @@
 package dev.donmanuel.firestoreclean.presentation.book_list
 
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -12,7 +9,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.donmanuel.firestoreclean.R
@@ -20,11 +16,11 @@ import dev.donmanuel.firestoreclean.components.LoadingIndicator
 import dev.donmanuel.firestoreclean.core.logErrorMessage
 import dev.donmanuel.firestoreclean.core.showToastMessage
 import dev.donmanuel.firestoreclean.domain.model.Response
-import dev.donmanuel.firestoreclean.presentation.book_list.components.AddBookAlertDialog
-import dev.donmanuel.firestoreclean.presentation.book_list.components.AddBookFloatingActionButton
-import dev.donmanuel.firestoreclean.presentation.book_list.components.BookListContent
-import dev.donmanuel.firestoreclean.presentation.book_list.components.EmptyBookListContent
-import dev.donmanuel.firestoreclean.presentation.book_list.components.TopBar
+import dev.donmanuel.firestoreclean.presentation.book_list.composables.AddBookAlertDialog
+import dev.donmanuel.firestoreclean.presentation.book_list.composables.AddBookFloatingActionButton
+import dev.donmanuel.firestoreclean.presentation.book_list.composables.BookListContent
+import dev.donmanuel.firestoreclean.presentation.book_list.composables.EmptyBookListContent
+import dev.donmanuel.firestoreclean.presentation.book_list.composables.TopBar
 
 @Composable
 fun BookListScreen(
@@ -41,16 +37,7 @@ fun BookListScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = stringResource(R.string.app_name)
-                    )
-                },
-                backgroundColor = MaterialTheme.colors.primary,
-                contentColor = MaterialTheme.colors.onPrimary,
-                elevation = 10.dp,
-            )
+            TopBar()
         },
         floatingActionButton = {
             AddBookFloatingActionButton(

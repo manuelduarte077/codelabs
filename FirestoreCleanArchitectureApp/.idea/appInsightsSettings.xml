@@ -22,10 +22,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="dev.donmanuel.firestoreclean" />
+                  <option name="mobileSdkAppId" value="1:3478773206:android:bd1622e25d331b53bc5877" />
+                  <option name="projectId" value="labsapp-64cf5" />
+                  <option name="projectNumber" value="3478773206" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

@@ -18,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class BookListViewModel @Inject constructor(
     private val repo: BookListRepository
-): ViewModel() {
+) : ViewModel() {
     private val _bookListState = MutableStateFlow<BookListResponse>(Response.Loading)
     val bookListState: StateFlow<BookListResponse> = _bookListState.asStateFlow()
 
