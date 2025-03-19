@@ -15,7 +15,7 @@ typealias DeleteBookResponse = Response<Unit>
 interface BookListRepository {
     /**
      * Obtiene una lista de libros como un flujo de [BookListResponse].
-     *
+     *[;. uggfedxexsdesxxsde4]
      * @return Un [Flow] que emite [BookListResponse], que puede ser un éxito con una lista de libros o un error.
      */
     fun getBookList(): Flow<BookListResponse>
