@@ -4,17 +4,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dev.donmanuel.cartoonapp.presentation.composables.CartoonItem
 import dev.donmanuel.cartoonapp.presentation.viewmodel.CartoonViewModel
@@ -31,15 +29,13 @@ fun CartoonListScreen(viewModel: CartoonViewModel = hiltViewModel()) {
         modifier = Modifier.fillMaxSize(),
         topBar = {
             TopAppBar(
-                title = { Text(text = "Cartoon List") },
-                actions = {
-                    IconButton(onClick = { }) {
-                        Icon(
-                            imageVector = Icons.Default.FavoriteBorder,
-                            contentDescription = "Search",
-                        )
-                    }
-                }
+                title = {
+                    Text(
+                        text = "Cartoon List",
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                },
             )
         }
     ) { padding ->
@@ -50,7 +46,6 @@ fun CartoonListScreen(viewModel: CartoonViewModel = hiltViewModel()) {
         ) {
 
             items(cartoons) { cartoon ->
-
                 CartoonItem(cartoon, isFavorite = favorites.any { it.id == cartoon.id }) {
                     viewModel.toggleFavorite(cartoon)
                 }
