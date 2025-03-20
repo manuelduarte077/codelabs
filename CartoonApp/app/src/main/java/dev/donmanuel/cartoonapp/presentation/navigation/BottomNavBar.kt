@@ -6,6 +6,10 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 
+/**
+ * Bottom navigation bar for the app.
+ */
+
 @Composable
 fun BottomNavBar(
     navItems: List<NavItem>,

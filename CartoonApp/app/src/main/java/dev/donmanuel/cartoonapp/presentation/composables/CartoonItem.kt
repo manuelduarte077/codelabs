@@ -1,5 +1,6 @@
 package dev.donmanuel.cartoonapp.presentation.composables
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -30,14 +31,15 @@ import dev.donmanuel.cartoonapp.domain.model.Cartoon
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CartoonItem(cartoon: Cartoon, isFavorite: Boolean, onFavoriteClick: () -> Unit) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp)
-    ) {
-
-
+fun CartoonItem(
+    cartoon: Cartoon,
+    isFavorite: Boolean,
+    onFavoriteClick: () -> Unit,
+    onClick: () -> Unit
+) {
+    Row(modifier = Modifier
+        .clickable { onClick() }
+        .padding(8.dp)) {
         AsyncImage(
             model = cartoon.image,
             contentDescription = cartoon.title,
@@ -53,14 +55,14 @@ fun CartoonItem(cartoon: Cartoon, isFavorite: Boolean, onFavoriteClick: () -> Un
                 .padding(start = 8.dp)
         ) {
             Text(
-                text = cartoon.title, fontWeight = FontWeight.Bold,
+                text = cartoon.title,
+                fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(bottom = 4.dp),
                 fontSize = 16.sp
             )
 
             Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -71,22 +73,18 @@ fun CartoonItem(cartoon: Cartoon, isFavorite: Boolean, onFavoriteClick: () -> Un
                 )
                 Spacer(modifier = Modifier.size(4.dp))
                 Text(
-                    text = cartoon.year.toString(),
-                    fontSize = 14.sp
+                    text = cartoon.year.toString(), fontSize = 14.sp
                 )
             }
 
             Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 cartoon.genre.forEach { genre ->
                     Text(
-                        text = "$genre,",
-                        fontSize = 12.sp,
-                        modifier = Modifier.padding(end = 4.dp)
+                        text = "$genre,", fontSize = 12.sp, modifier = Modifier.padding(end = 4.dp)
                     )
                 }
             }

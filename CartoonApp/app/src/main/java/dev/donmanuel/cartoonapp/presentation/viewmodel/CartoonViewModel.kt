@@ -27,28 +27,42 @@ class CartoonViewModel @Inject constructor(
     private val repository: CartoonRepository
 ) : ViewModel() {
 
-    private val _cartoons = MutableStateFlow<List<Cartoon>>(emptyList())
-    val cartoons: StateFlow<List<Cartoon>> = _cartoons
+    private val _cartoons2D = MutableStateFlow<List<Cartoon>>(emptyList())
+    val cartoons2D: StateFlow<List<Cartoon>> = _cartoons2D
 
-    val favorites: StateFlow<List<FavoriteCartoon>> = repository.getAllFavorites().stateIn(
-        viewModelScope, SharingStarted.Lazily, emptyList()
-    )
+    private val _cartoons3D = MutableStateFlow<List<Cartoon>>(emptyList())
+    val cartoons3D: StateFlow<List<Cartoon>> = _cartoons3D
+
+    val favorites: StateFlow<List<FavoriteCartoon>> = repository.getAllFavorites()
+        .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+
 
     init {
         fetchCartoons2D()
+        fetchCartoons3D()
     }
 
     private fun fetchCartoons2D() {
         viewModelScope.launch {
-            _cartoons.value = repository.getCartoons2D()
+            _cartoons2D.value = repository.getCartoons2D()
+        }
+    }
+
+    fun fetchCartoons3D() {
+        viewModelScope.launch {
+            _cartoons3D.value = repository.getCartoons3D()
+        }
+    }
+
+    fun removeFavorite(cartoon: FavoriteCartoon) {
+        viewModelScope.launch {
+            repository.removeFavorite(cartoon)
         }
     }
 
     fun toggleFavorite(cartoon: Cartoon) {
         viewModelScope.launch {
-            val favorite = FavoriteCartoon(
-                cartoon.id, cartoon.title, cartoon.image,
-            )
+            val favorite = FavoriteCartoon(cartoon.id, cartoon.title, cartoon.image)
 
             if (favorites.value.any { it.id == cartoon.id }) {
                 repository.removeFavorite(favorite)
