@@ -1,13 +1,49 @@
 package dev.donmanuel.cartoons.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Futurama {
-    private String title;
-    private String category;
-    private String description;
-    private String Slogan;
-    private double price;
-    private int stock;
+    @SerializedName("id")
     private int id;
+    
+    @SerializedName("title")
+    private String title;
+    
+    @SerializedName("category")
+    private String category;
+    
+    @SerializedName("description")
+    private String description;
+    
+    @SerializedName("slogan")
+    private String slogan;
+    
+    @SerializedName("price")
+    private Double price;
+    
+    @SerializedName("stock")
+    private Integer stock;
+
+    public Futurama() {
+    }
+
+    public Futurama(int id, String title, String category, String description, String slogan, Double price, Integer stock) {
+        this.id = id;
+        this.title = title;
+        this.category = category;
+        this.description = description;
+        this.slogan = slogan;
+        this.price = price;
+        this.stock = stock;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -33,35 +69,27 @@ public class Futurama {
         this.description = description;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     public String getSlogan() {
-        return Slogan;
+        return slogan;
     }
 
     public void setSlogan(String slogan) {
-        Slogan = slogan;
+        this.slogan = slogan;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
 }

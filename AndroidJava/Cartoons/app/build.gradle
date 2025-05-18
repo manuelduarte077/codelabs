@@ -15,6 +15,13 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        
+        // For Room, add Java 8 support
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
 
     buildTypes {
@@ -49,7 +56,10 @@ dependencies {
 
     // Glide
     implementation libs.glide
-
+    
+    // Room
+    implementation libs.room.runtime
+    annotationProcessor libs.room.compiler
 
     implementation libs.androidx.lifecycle.livedata.ktx
     implementation libs.androidx.lifecycle.viewmodel.ktx

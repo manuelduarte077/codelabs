@@ -3,18 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_futurama">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="dev.donmanuel.cartoons.ui.home.HomeFragment"
+        android:id="@+id/navigation_futurama"
+        android:name="dev.donmanuel.cartoons.ui.futurama.FuturamaFragment"
         android:label="@string/title_futurama"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_futurama" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="dev.donmanuel.cartoons.ui.dashboard.DashboardFragment"
+        android:id="@+id/navigation_simpsons"
+        android:name="dev.donmanuel.cartoons.ui.simpsons.SimpsonsFragment"
         android:label="@string/title_simpsons"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_simpsons" />
 
+    <fragment
+        android:id="@+id/navigation_favorites"
+        android:name="dev.donmanuel.cartoons.ui.favorites.FavoritesFragment"
+        android:label="@string/title_favorites"
+        tools:layout="@layout/fragment_favorites" />
 </navigation>

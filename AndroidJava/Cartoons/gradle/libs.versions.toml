@@ -21,6 +21,9 @@ recyclerview = "1.4.0"
 # Glide
 glide = "4.14.2"
 
+# Room
+room = "2.7.1"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -41,7 +44,11 @@ recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version
 # Glide
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 
+# Room
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-
