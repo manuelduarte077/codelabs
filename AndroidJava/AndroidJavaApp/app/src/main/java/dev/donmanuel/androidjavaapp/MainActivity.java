@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("postTitle", post.getTitle());
             intent.putExtra("postBody", post.getBody());
 
-
             startActivity(intent);
         });
         recyclerView.setAdapter(postAdapter);

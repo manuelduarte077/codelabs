@@ -1,12 +1,12 @@
-package dev.donmanuel.androidjavaapp.api;
+package dev.donmanuel.cartoons.ui.dashboard.api;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-
-    private static final String BASE_URL = "https://jsonplaceholder.typicode.com/";
+    private static final String BASE_URL = "https://api.sampleapis.com/";
     private static Retrofit retrofit = null;
+    public static final ApiService apiService = createApiService();
 
     public static Retrofit getClient() {
         if (retrofit == null) {
@@ -18,5 +18,9 @@ public class ApiClient {
             System.out.println("Retrofit object created");
         }
         return retrofit;
+    }
+
+    private static ApiService createApiService() {
+        return getClient().create(ApiService.class);
     }
 }

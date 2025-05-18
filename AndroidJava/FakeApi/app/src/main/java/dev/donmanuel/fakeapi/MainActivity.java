@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         ApiClient apiClient = ApiClient.getInstance();
 
-        apiClient.fetchProducts(new ApiCallback<List<Product>>() {
+        apiClient.fetchProducts(new ApiCallback<>() {
             @Override
             public void onSuccess(List<Product> products) {
                 runOnUiThread(() -> {

@@ -50,9 +50,9 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         // Configurar el RecyclerView para el carrusel
         imageRecyclerView.setLayoutManager(
-            new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+                new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         );
-        
+
         // Agregar PagerSnapHelper para efecto de paginación
         PagerSnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(imageRecyclerView);
@@ -70,7 +70,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     private void fetchProductDetails(int productId) {
         ApiClient apiClient = ApiClient.getInstance();
 
-        apiClient.fetchProductById(productId, new ApiCallback<Product>() {
+        apiClient.fetchProductById(productId, new ApiCallback<>() {
             @Override
             public void onSuccess(Product product) {
                 runOnUiThread(() -> {
@@ -78,7 +78,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                     price.setText("$" + product.getPrice());
                     description.setText(product.getDescription());
                     Picasso.get().load(product.getImages().get(0)).into(image);
-                    
+
                     // Configurar el adaptador del carrusel de imágenes
                     ImageCarouselAdapter carouselAdapter = new ImageCarouselAdapter(product.getImages());
                     imageRecyclerView.setAdapter(carouselAdapter);
@@ -87,9 +87,9 @@ public class ProductDetailActivity extends AppCompatActivity {
 
             @Override
             public void onError(Exception e) {
-                runOnUiThread(() -> Toast.makeText(ProductDetailActivity.this, 
-                    "Error al cargar detalles: " + e.getMessage(), 
-                    Toast.LENGTH_SHORT).show());
+                runOnUiThread(() -> Toast.makeText(ProductDetailActivity.this,
+                        "Error al cargar detalles: " + e.getMessage(),
+                        Toast.LENGTH_SHORT).show());
             }
         });
     }
