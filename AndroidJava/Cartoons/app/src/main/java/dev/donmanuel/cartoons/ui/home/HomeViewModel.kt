@@ -3,7 +3,8 @@ package dev.donmanuel.cartoons.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import dev.donmanuel.cartoons.ui.home.api.ApiClient
+import dev.donmanuel.cartoons.core.api.ApiClient
+import dev.donmanuel.cartoons.core.api.ApiService
 import dev.donmanuel.cartoons.model.Futurama
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,6 +25,8 @@ class HomeViewModel : ViewModel() {
 
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
+    
+    private val apiService = ApiClient.createService(ApiService::class.java)
 
     init {
         fetchCharacters()
@@ -31,7 +34,7 @@ class HomeViewModel : ViewModel() {
 
     private fun fetchCharacters() {
         _isLoading.value = true
-        ApiClient.apiService.getFuturamaCharacters().enqueue(object : Callback<List<Futurama>> {
+        apiService.getFuturamaCharacters().enqueue(object : Callback<List<Futurama>> {
             override fun onResponse(call: Call<List<Futurama>>, response: Response<List<Futurama>>) {
                 _isLoading.value = false
                 if (response.isSuccessful) {
