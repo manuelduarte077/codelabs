@@ -10,7 +10,6 @@ import dev.donmanuel.cartoons.model.Favorite;
 
 @Database(entities = {Favorite.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
-
     private static volatile AppDatabase INSTANCE;
 
     public abstract FavoriteDao favoriteDao();
@@ -20,9 +19,9 @@ public abstract class AppDatabase extends RoomDatabase {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(
-                            context.getApplicationContext(),
-                            AppDatabase.class,
-                            "cartoons_database")
+                                    context.getApplicationContext(),
+                                    AppDatabase.class,
+                                    "cartoons_database")
                             .fallbackToDestructiveMigration()
                             .build();
                 }

@@ -1,12 +1,14 @@
 package dev.donmanuel.cartoons.ui.futurama;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -32,10 +34,27 @@ public class FuturamaFragment extends Fragment {
         final TextView textView = binding.textFuturama;
         futuramaViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
+        setupSearchView();
         setupRecyclerView();
         observeData();
 
         return root;
+    }
+
+    private void setupSearchView() {
+        binding.searchViewFuturama.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                futuramaViewModel.setSearchQuery(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                futuramaViewModel.setSearchQuery(newText);
+                return true;
+            }
+        });
     }
 
     private void setupRecyclerView() {
@@ -48,7 +67,7 @@ public class FuturamaFragment extends Fragment {
 
         // Set click listener for favorite button
         futuramaAdapter.setOnFavoriteClickListener((futurama, isFavorite) ->
-            futuramaViewModel.toggleFavorite(futurama, isFavorite)
+                futuramaViewModel.toggleFavorite(futurama, isFavorite)
         );
 
         RecyclerView recyclerView = binding.recyclerViewFuturama;
@@ -62,6 +81,13 @@ public class FuturamaFragment extends Fragment {
             if (futuramaList != null) {
                 futuramaAdapter.setFuturamaList(futuramaList);
                 updateLoadingState(false);
+
+                // Show empty state message if no results
+                if (futuramaList.isEmpty() && !TextUtils.isEmpty(binding.searchViewFuturama.getQuery())) {
+                    binding.textNoResults.setVisibility(View.VISIBLE);
+                } else {
+                    binding.textNoResults.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -77,6 +103,7 @@ public class FuturamaFragment extends Fragment {
         if (isLoading) {
             binding.progressBar.setVisibility(View.VISIBLE);
             binding.recyclerViewFuturama.setVisibility(View.GONE);
+            binding.textNoResults.setVisibility(View.GONE);
         } else {
             binding.progressBar.setVisibility(View.GONE);
             binding.recyclerViewFuturama.setVisibility(View.VISIBLE);

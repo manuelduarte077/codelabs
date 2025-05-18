@@ -56,19 +56,19 @@ public class FavoriteRepository {
 
     public void removeFromFavorites(final Simpsons simpsons) {
         executorService.execute(() ->
-            favoriteDao.deleteFavoriteByItemIdAndType(simpsons.getId(), Favorite.TYPE_SIMPSONS)
+                favoriteDao.deleteFavoriteByItemIdAndType(simpsons.getId(), Favorite.TYPE_SIMPSONS)
         );
     }
 
     public void removeFromFavorites(final Futurama futurama) {
         executorService.execute(() ->
-            favoriteDao.deleteFavoriteByItemIdAndType(futurama.getId(), Favorite.TYPE_FUTURAMA)
+                favoriteDao.deleteFavoriteByItemIdAndType(futurama.getId(), Favorite.TYPE_FUTURAMA)
         );
     }
 
     public void removeFavorite(final Favorite favorite) {
         executorService.execute(() ->
-            favoriteDao.deleteFavorite(favorite)
+                favoriteDao.deleteFavorite(favorite)
         );
     }
 

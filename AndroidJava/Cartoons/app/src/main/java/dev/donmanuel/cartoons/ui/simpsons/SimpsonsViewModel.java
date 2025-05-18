@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 
@@ -24,6 +25,10 @@ public class SimpsonsViewModel extends AndroidViewModel {
     private final FavoriteRepository favoriteRepository;
     private final LiveData<List<Simpsons>> simpsonsData;
     private final LiveData<List<Integer>> favoriteSimpsonIds;
+    
+    // For search functionality
+    private final MutableLiveData<String> searchQuery = new MutableLiveData<>("");
+    private final MediatorLiveData<List<Simpsons>> filteredSimpsonsData = new MediatorLiveData<>();
 
     public SimpsonsViewModel(@NonNull Application application) {
         super(application);
@@ -47,6 +52,50 @@ public class SimpsonsViewModel extends AndroidViewModel {
                 return ids;
             }
         );
+        
+        // Setup filtered data based on search query
+        setupFilteredData();
+    }
+
+    private void setupFilteredData() {
+        // Add source for original data
+        filteredSimpsonsData.addSource(simpsonsData, episodes -> {
+            filterEpisodes(episodes, searchQuery.getValue());
+        });
+        
+        // Add source for search query changes
+        filteredSimpsonsData.addSource(searchQuery, query -> {
+            filterEpisodes(simpsonsData.getValue(), query);
+        });
+    }
+    
+    private void filterEpisodes(List<Simpsons> episodes, String query) {
+        if (episodes == null) {
+            filteredSimpsonsData.setValue(null);
+            return;
+        }
+        
+        if (query == null || query.isEmpty()) {
+            filteredSimpsonsData.setValue(episodes);
+            return;
+        }
+        
+        String lowerCaseQuery = query.toLowerCase().trim();
+        List<Simpsons> filteredList = new ArrayList<>();
+        
+        for (Simpsons episode : episodes) {
+            // Search in name and description
+            if ((episode.getName() != null && episode.getName().toLowerCase().contains(lowerCaseQuery)) ||
+                (episode.getDescription() != null && episode.getDescription().toLowerCase().contains(lowerCaseQuery))) {
+                filteredList.add(episode);
+            }
+        }
+        
+        filteredSimpsonsData.setValue(filteredList);
+    }
+    
+    public void setSearchQuery(String query) {
+        searchQuery.setValue(query);
     }
 
     public LiveData<String> getText() {
@@ -54,7 +103,7 @@ public class SimpsonsViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Simpsons>> getSimpsonsData() {
-        return simpsonsData;
+        return filteredSimpsonsData;
     }
 
     public LiveData<List<Integer>> getFavoriteSimpsonIds() {

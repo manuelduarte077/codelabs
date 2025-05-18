@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 
@@ -24,6 +25,10 @@ public class FuturamaViewModel extends AndroidViewModel {
     private final FavoriteRepository favoriteRepository;
     private final LiveData<List<Futurama>> futuramaData;
     private final LiveData<List<Integer>> favoriteFuturamaIds;
+    
+    // For search functionality
+    private final MutableLiveData<String> searchQuery = new MutableLiveData<>("");
+    private final MediatorLiveData<List<Futurama>> filteredFuturamaData = new MediatorLiveData<>();
 
     public FuturamaViewModel(@NonNull Application application) {
         super(application);
@@ -47,6 +52,52 @@ public class FuturamaViewModel extends AndroidViewModel {
                 return ids;
             }
         );
+        
+        // Setup filtered data based on search query
+        setupFilteredData();
+    }
+    
+    private void setupFilteredData() {
+        // Add source for original data
+        filteredFuturamaData.addSource(futuramaData, episodes -> {
+            filterEpisodes(episodes, searchQuery.getValue());
+        });
+        
+        // Add source for search query changes
+        filteredFuturamaData.addSource(searchQuery, query -> {
+            filterEpisodes(futuramaData.getValue(), query);
+        });
+    }
+    
+    private void filterEpisodes(List<Futurama> episodes, String query) {
+        if (episodes == null) {
+            filteredFuturamaData.setValue(null);
+            return;
+        }
+        
+        if (query == null || query.isEmpty()) {
+            filteredFuturamaData.setValue(episodes);
+            return;
+        }
+        
+        String lowerCaseQuery = query.toLowerCase().trim();
+        List<Futurama> filteredList = new ArrayList<>();
+        
+        for (Futurama episode : episodes) {
+            // Search in title, description, and slogan
+            if ((episode.getTitle() != null && episode.getTitle().toLowerCase().contains(lowerCaseQuery)) ||
+                (episode.getDescription() != null && episode.getDescription().toLowerCase().contains(lowerCaseQuery)) ||
+                (episode.getSlogan() != null && episode.getSlogan().toLowerCase().contains(lowerCaseQuery)) ||
+                (episode.getCategory() != null && episode.getCategory().toLowerCase().contains(lowerCaseQuery))) {
+                filteredList.add(episode);
+            }
+        }
+        
+        filteredFuturamaData.setValue(filteredList);
+    }
+    
+    public void setSearchQuery(String query) {
+        searchQuery.setValue(query);
     }
 
     public LiveData<String> getText() {
@@ -54,7 +105,7 @@ public class FuturamaViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Futurama>> getFuturamaData() {
-        return futuramaData;
+        return filteredFuturamaData;
     }
 
     public LiveData<List<Integer>> getFavoriteFuturamaIds() {

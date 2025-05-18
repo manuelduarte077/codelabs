@@ -5,25 +5,25 @@ import com.google.gson.annotations.SerializedName;
 public class Simpsons {
     @SerializedName("id")
     private int id;
-    
+
     @SerializedName("name")
     private String name;
-    
+
     @SerializedName("description")
     private String description;
-    
+
     @SerializedName("season")
     private int season;
-    
+
     @SerializedName("episode")
     private int episode;
-    
+
     @SerializedName("rating")
     private double rating;
-    
+
     @SerializedName("airDate")
     private String airDate;
-    
+
     @SerializedName("thumbnailUrl")
     private String thumbnailUrl;
 
