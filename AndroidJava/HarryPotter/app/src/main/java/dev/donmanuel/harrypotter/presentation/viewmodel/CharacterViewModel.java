@@ -37,7 +37,7 @@ public class CharacterViewModel extends ViewModel {
     
     public void loadAllCharacters() {
         loadingLiveData.setValue(true);
-        repository.getAllCharacters(new Callback<List<Character>>() {
+        repository.getAllCharacters(new Callback<>() {
             @Override
             public void onResponse(Call<List<Character>> call, Response<List<Character>> response) {
                 loadingLiveData.setValue(false);
@@ -47,7 +47,7 @@ public class CharacterViewModel extends ViewModel {
                     errorLiveData.setValue("Error: " + response.code());
                 }
             }
-            
+
             @Override
             public void onFailure(Call<List<Character>> call, Throwable t) {
                 loadingLiveData.setValue(false);
@@ -55,25 +55,5 @@ public class CharacterViewModel extends ViewModel {
             }
         });
     }
-    
-    public void loadCharactersByHouse(String house) {
-        loadingLiveData.setValue(true);
-        repository.getCharactersByHouse(house, new Callback<List<Character>>() {
-            @Override
-            public void onResponse(Call<List<Character>> call, Response<List<Character>> response) {
-                loadingLiveData.setValue(false);
-                if (response.isSuccessful() && response.body() != null) {
-                    charactersLiveData.setValue(response.body());
-                } else {
-                    errorLiveData.setValue("Error: " + response.code());
-                }
-            }
-            
-            @Override
-            public void onFailure(Call<List<Character>> call, Throwable t) {
-                loadingLiveData.setValue(false);
-                errorLiveData.setValue("Network error: " + t.getMessage());
-            }
-        });
-    }
+
 }

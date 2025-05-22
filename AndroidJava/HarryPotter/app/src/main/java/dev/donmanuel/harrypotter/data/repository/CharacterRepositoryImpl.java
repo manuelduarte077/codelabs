@@ -22,15 +22,4 @@ public class CharacterRepositoryImpl implements CharacterRepository {
         call.enqueue(callback);
     }
 
-    @Override
-    public void getCharactersByHouse(String house, Callback<List<Character>> callback) {
-        Call<List<Character>> call = apiService.getCharactersByHouse(house);
-        call.enqueue(callback);
-    }
-
-    @Override
-    public void getCharacterById(String id, Callback<List<Character>> callback) {
-        Call<List<Character>> call = apiService.getCharacterById(id);
-        call.enqueue(callback);
-    }
 }

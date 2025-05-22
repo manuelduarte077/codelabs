@@ -7,6 +7,4 @@ import retrofit2.Callback;
 
 public interface CharacterRepository {
     void getAllCharacters(Callback<List<Character>> callback);
-    void getCharactersByHouse(String house, Callback<List<Character>> callback);
-    void getCharacterById(String id, Callback<List<Character>> callback);
 }

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import dev.donmanuel.harrypotter.data.model.Character;
 import dev.donmanuel.harrypotter.presentation.adapter.CharacterAdapter;
 import dev.donmanuel.harrypotter.presentation.view.CharacterDetailActivity;
 import dev.donmanuel.harrypotter.presentation.viewmodel.CharacterViewModel;
