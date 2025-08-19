@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AutoTimeChecker</string>
+    <string name="btn_open_settings">Abrir Fecha y hora</string>
+    <string name="status_checking">Verificando configuración…</string>
+    <string name="status_auto_time_on">✅ Hora automática activada</string>
+    <string name="status_auto_time_off">❌ Hora automática desactivada</string>
+    <string name="status_auto_tz_on">🕓 Zona horaria automática activada</string>
+    <string name="status_auto_tz_off">🌐 Zona horaria automática desactivada</string>
+</resources>
